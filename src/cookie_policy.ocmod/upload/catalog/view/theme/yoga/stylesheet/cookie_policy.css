@@ -1,0 +1,35 @@
+.cookie-banner {
+  position: fixed;
+  bottom: 30px;
+  left: calc(var(--sidebar-width) + 15px);
+  max-width: 400px;
+  background-color: #fff;
+  color: #000;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 7px 3px rgba(134, 134, 134, 0.3);
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  z-index: 9999;
+}
+
+.cookie-text a {
+  color: #000;
+  text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+  .cookie-banner{
+    left: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .cookie-banner{
+    max-width: inherit;
+    width: calc(100% - 30px);
+    left: 15px;
+    bottom: 15px;
+  }
+}

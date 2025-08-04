@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <name>Cookie message</name>
+  <code>cookiemessage</code>
+  <version>1.0.0.1</version>
+  <author>qMalmind | expoa.ru</author>
+  <link>info@expoa.ru</link>
+
+  <file path="catalog/view/theme/*/template/common/footer.twig">
+      <operation error="skip">
+        <search><![CDATA[
+			</footer>
+        ]]></search>
+        <add position="after"><![CDATA[
+        <!-- ========== Cookie Policy MOD START ========== -->
+				{{ cookie_policy }}
+        <!--  ========== Cookie Policy MOD END ========== -->
+        ]]></add>
+      </operation>
+  </file>
+
+  <file path="catalog/controller/common/footer.php">
+      <operation error="skip">
+        <search><![CDATA[
+			return $this->load->view('common/footer', $data);
+        ]]></search>
+        <add position="before"><![CDATA[
+        // ========== Cookie Policy MOD START ==========
+		    $data['cookie_policy'] = $this->load->controller('extension/module/cookie_policy');
+		    // ========== Cookie Policy MOD END ==========
+        ]]></add>
+      </operation>
+  </file>
+</modification>

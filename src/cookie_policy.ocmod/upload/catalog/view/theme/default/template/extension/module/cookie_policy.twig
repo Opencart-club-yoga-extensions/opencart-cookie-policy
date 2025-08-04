@@ -1,0 +1,11 @@
+<!-- модуль политика куки cookie_policy -->
+{% if cookie_description %}
+<script src="catalog/view/javascript/cookie_policy.js"></script>
+<div class="cookie-banner" role="alertdialog" data-reset-timestamp="{{ reset_timestamp }}" style="display:none;">
+  <button class="cookie-close-btn btn btn-secondary btn-sm">×</button>
+  <p class="cookie-text">
+    {{ cookie_description }}
+  </p>
+  <button class="cookie-btn btn btn-primary">Согласиться</button>
+</div>
+{% endif %}
