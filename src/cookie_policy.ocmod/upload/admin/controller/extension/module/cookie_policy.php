@@ -144,7 +144,7 @@ class ControllerExtensionModuleCookiePolicy extends Controller {
         }
 
         if(!isset($settings['module_cookie_policy_description'])){
-            $settings['module_cookie_policy_description'] = 'Наживая на кнопку вы соглашаетесь с нашей политикой куки';
+            $settings['module_cookie_policy_description'] = 'Нажимая на кнопку вы соглашаетесь с нашей политикой куки';
         }
 
         if(!isset($settings['module_cookie_policy_status'])){
