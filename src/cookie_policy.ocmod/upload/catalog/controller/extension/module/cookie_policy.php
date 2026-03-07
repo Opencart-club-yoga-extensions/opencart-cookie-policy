@@ -34,6 +34,8 @@ class ControllerExtensionModuleCookiePolicy extends Controller {
             $data['cookie_description'] = html_entity_decode($description, ENT_QUOTES, 'UTF-8');
             $data['reset_timestamp'] = $settings['module_cookie_policy_reset_timestamp'];
             
+            $data['layout_class'] = isset($settings['module_cookie_policy_layout']) ? $settings['module_cookie_policy_layout'] : 'bottom-right';
+
             // Загружаем и возвращаем шаблон модуля
             return $this->load->view('extension/module/cookie_policy', $data);
         }else{

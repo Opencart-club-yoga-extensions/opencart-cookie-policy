@@ -73,8 +73,7 @@ class ControllerExtensionModuleCookiePolicy extends Controller {
 
               
         $data['reset_action'] = $this->url->link('extension/module/cookie_policy/resetCookie', 'user_token=' . $this->session->data['user_token'], true);
-
-    
+        $data['change_layout_action'] = $this->url->link('extension/module/cookie_policy/changeLayout', 'user_token=' . $this->session->data['user_token'], true);
 
 		if (isset($this->request->post['module_cookie_policy_status'])) {
 			$data['module_cookie_policy_status'] = $this->request->post['module_cookie_policy_status'];
@@ -87,6 +86,12 @@ class ControllerExtensionModuleCookiePolicy extends Controller {
             $data['module_cookie_policy_description'] = $this->request->post['module_cookie_policy_description'];
         } else {
             $data['module_cookie_policy_description'] = $this->config->get('module_cookie_policy_description');
+        }
+
+        if (isset($this->request->post['module_cookie_policy_layout'])) {
+            $data['module_cookie_policy_layout'] = $this->request->post['module_cookie_policy_layout'];
+        } else {
+            $data['module_cookie_policy_layout'] = $this->config->get('module_cookie_policy_layout');
         }
 
 		$data['header'] = $this->load->controller('common/header');
@@ -135,6 +140,27 @@ class ControllerExtensionModuleCookiePolicy extends Controller {
         $this->response->setOutput(json_encode($json));
     }
 
+    public function changeLayout() {
+        $this->load->language('extension/module/cookie_policy');
+        $json = array();
+
+        if (!$this->user->hasPermission('modify', 'extension/module/cookie_policy')) {
+            $json['error'] = $this->language->get('error_permission');
+        } else {
+            $this->load->model('setting/setting');
+            $settings = $this->model_setting_setting->getSetting('module_cookie_policy');
+            
+            if (isset($this->request->post['layout'])) {
+                $settings['module_cookie_policy_layout'] = $this->request->post['layout'];
+                $this->model_setting_setting->editSetting('module_cookie_policy', $settings);
+                $json['success'] = $this->language->get('text_success');
+            }
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
     public function install() {
         $this->load->model('setting/setting');
         $settings = $this->model_setting_setting->getSetting('module_cookie_policy');
@@ -149,6 +175,10 @@ class ControllerExtensionModuleCookiePolicy extends Controller {
 
         if(!isset($settings['module_cookie_policy_status'])){
             $settings['module_cookie_policy_status'] = 0;
+        }
+
+        if(!isset($settings['module_cookie_policy_layout'])){
+            $settings['module_cookie_policy_layout'] = 'bottom-right';
         }
 
         if(!empty($settings)){

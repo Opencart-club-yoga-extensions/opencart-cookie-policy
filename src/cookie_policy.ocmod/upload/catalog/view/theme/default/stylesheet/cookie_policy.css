@@ -1,17 +1,39 @@
+/* Базовые стили */
 .cookie-banner {
   position: fixed;
-  bottom: 30px;
-  left: calc(var(--sidebar-width) + 15px);
-  max-width: 400px;
   background-color: #fff;
   color: #000;
   padding: 20px 25px;
-  border-radius: 12px;
   box-shadow: 0 0 7px 3px rgba(134, 134, 134, 0.3);
   font-family: 'Arial', sans-serif;
   font-size: 14px;
   line-height: 1.5;
   z-index: 9999;
+}
+
+/* 1. Всплывающее окно справа снизу */
+.cookie-banner.bottom-right {
+  bottom: 30px;
+  right: 30px;
+  max-width: 400px;
+  border-radius: 12px;
+}
+
+/* 2. Всплывающее окно слева снизу */
+.cookie-banner.bottom-left {
+  bottom: 30px;
+  left: calc(var(--sidebar-width, 0px) + 15px);
+  max-width: 400px;
+  border-radius: 12px;
+}
+
+/* 3. Всплывающее окно на всю ширину */
+.cookie-banner.full-width {
+  bottom: 0;
+  left: calc(var(--sidebar-width, 0px));
+  width: calc(100% - var(--sidebar-width, 0px));
+  max-width: 100%;
+  border-radius: 0;
 }
 
 .cookie-text a {
@@ -21,19 +43,30 @@
 
 .cookie-close-btn{
   float: right;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }
 
+/* Адаптивность */
 @media (max-width: 1200px) {
-  .cookie-banner{
+  .cookie-banner.full-width{
+    width: 100%;
+    left: 0;
+  }
+  .cookie-banner.bottom-left {
     left: 30px;
   }
 }
 
 @media (max-width: 576px) {
-  .cookie-banner{
+  .cookie-banner.bottom-right, 
+  .cookie-banner.bottom-left {
     max-width: inherit;
     width: calc(100% - 30px);
     left: 15px;
+    right: 15px;
     bottom: 15px;
   }
 }
