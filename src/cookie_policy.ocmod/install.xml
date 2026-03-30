@@ -6,10 +6,10 @@
   <author>qMalmind | expoa.ru</author>
   <link>info@expoa.ru</link>
 
-  <file path="catalog/view/theme/*/template/common/footer.twig">
+  <file path="catalog/view/theme/*/template/common/header.twig">
       <operation error="skip">
         <search><![CDATA[
-			</footer>
+			<nav class="sidebar
         ]]></search>
         <add position="after"><![CDATA[
         <!-- ========== Cookie Policy MOD START ========== -->
