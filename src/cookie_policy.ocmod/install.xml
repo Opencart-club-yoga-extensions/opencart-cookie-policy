@@ -6,12 +6,12 @@
   <author>qMalmind | expoa.ru</author>
   <link>info@expoa.ru</link>
 
-  <file path="catalog/view/theme/*/template/common/footer.twig">
+  <file path="catalog/view/theme/*/template/common/header.twig">
       <operation error="skip">
         <search><![CDATA[
-			</footer>
+			<nav
         ]]></search>
-        <add position="after"><![CDATA[
+        <add position="before"><![CDATA[
         <!-- ========== Cookie Policy MOD START ========== -->
 				{{ cookie_policy }}
         <!--  ========== Cookie Policy MOD END ========== -->
@@ -19,10 +19,10 @@
       </operation>
   </file>
 
-  <file path="catalog/controller/common/footer.php">
+  <file path="catalog/controller/common/header.php">
       <operation error="skip">
         <search><![CDATA[
-			return $this->load->view('common/footer', $data);
+			$data['title'] = $this->document->getTitle();
         ]]></search>
         <add position="before"><![CDATA[
         // ========== Cookie Policy MOD START ==========
